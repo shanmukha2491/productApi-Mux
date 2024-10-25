@@ -20,16 +20,17 @@ func main() {
 	sm := mux.NewRouter()
 
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
-
 	putRouter := sm.Methods(http.MethodPut).Subrouter()
-
-
+	deleteRouter := sm.Methods(http.MethodDelete).Subrouter()
 	postRouter := sm.Methods(http.MethodPost).Subrouter()
+
 	postRouter.Use(ph.MiddlewareValidationProduct)
 
 	getRouter.HandleFunc("/products", ph.GetProducts)
 	postRouter.HandleFunc("/createProduct", ph.CreateProduct)
 	putRouter.HandleFunc("/products/{id:[0-9]+}", ph.UpdateProduct)
+	deleteRouter.HandleFunc("/deleteProduct/{id:[0-9]+}", ph.DeleteProduct)
+
 	l.Println("Server Started Successfully")
 
 	server := &http.Server{

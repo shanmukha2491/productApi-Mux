@@ -26,6 +26,7 @@ func (p *Product) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	numId, err := strconv.Atoi(id)
 	if err != nil {
 		http.Error(rw, "Input is wrong", http.StatusInternalServerError)
+		return
 	}
 
 	if err = data.UpdateProductDetails(ls, numId); err != nil {
