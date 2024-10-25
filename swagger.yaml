@@ -1,0 +1,40 @@
+basePath: /
+consumes:
+    - application/json
+info:
+    description: '# Documentation for product API'
+    title: of product API
+    version: 1.0.0
+paths:
+    /createProduct:
+        post:
+            description: Creates the new product
+            operationId: createNewProduct
+            responses:
+                "200":
+                    $ref: '#/responses/productResponse'
+            tags:
+                - createProduct
+    /products:
+        get:
+            description: Returns a list of products
+            operationId: listProducts
+            responses:
+                "200":
+                    $ref: '#/responses/prodcutsResponse'
+            tags:
+                - products
+    /products/{id}:
+        put:
+            description: Creates the new product by id
+            operationId: updateExistingProduct
+            responses:
+                "200":
+                    $ref: '#/responses/productResponse'
+            tags:
+                - updateProduct
+produces:
+    - application/json
+schemes:
+    - http
+swagger: "2.0"
