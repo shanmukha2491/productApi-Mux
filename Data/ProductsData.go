@@ -33,6 +33,18 @@ func (p *Products) ToJSON(w io.Writer) error {
 	return e.Encode(p)
 }
 
+func (p *Products) RemoveProduct(id int) error {
+
+	for i, prod := range products {
+		if prod.Id == id {
+			products = append(products[:i], products[i+1:]...)
+		}
+
+	}
+
+	return ErrorProductNotFound
+}
+
 func (p *ProductDetails) FromJSON(r io.Reader) error {
 	e := json.NewDecoder(r)
 	return e.Decode(p)

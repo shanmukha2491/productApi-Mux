@@ -15,6 +15,12 @@ paths:
                     $ref: '#/responses/productResponse'
             tags:
                 - createProduct
+    /deleteProduct/{id}:
+        delete:
+            description: Removes the product based of Id
+            operationId: Delete
+            tags:
+                - removeProduct
     /products:
         get:
             description: Returns a list of products
