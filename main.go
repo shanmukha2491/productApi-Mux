@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -33,9 +34,20 @@ func main() {
 
 	l.Println("Server Started Successfully")
 
+	// CORS
+	// ch := gohandlers.CORS(
+	// 	gohandlers.AllowedOrigins([]string{"http://localhost:5000"}),
+	// )(sm)
+
+	ch := gohandlers.CORS(
+		gohandlers.AllowedOrigins([]string{"http://localhost:3000"}),                   // allow only this origin
+		gohandlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}), // add all the methods you need
+		gohandlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),           // add necessary headers
+	)(sm)
+
 	server := &http.Server{
 		Addr:         ":8080",
-		Handler:      sm,
+		Handler:      ch,
 		ReadTimeout:  1 * time.Second,
 		WriteTimeout: 1 * time.Second,
 		IdleTimeout:  120 * time.Second,
