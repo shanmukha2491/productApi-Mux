@@ -25,9 +25,10 @@ func main() {
 	deleteRouter := sm.Methods(http.MethodDelete).Subrouter()
 	postRouter := sm.Methods(http.MethodPost).Subrouter()
 
-	postRouter.Use(ph.MiddlewareValidationProduct)
-
+	// postRouter.Use(ph.MiddlewareValidationProduct)
 	getRouter.HandleFunc("/products", ph.GetProducts)
+	getRouter.HandleFunc("/product/download", ph.DownloadFile)
+	postRouter.HandleFunc("/product/upload", ph.UploadDocument)
 	postRouter.HandleFunc("/createProduct", ph.CreateProduct)
 	putRouter.HandleFunc("/products/{id:[0-9]+}", ph.UpdateProduct)
 	deleteRouter.HandleFunc("/deleteProduct/{id:[0-9]+}", ph.DeleteProduct)
